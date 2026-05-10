@@ -1,0 +1,54 @@
+ # dimension of eos table
+           1
+ # number of grid points in temperature T,minimum temperature, maximum temperature [MeV]
+      1     0.00000000E+00     0.00000000E+00
+ # number of grid points in baryon number density n_b,minimum baryon number density, maximum baryon number density [fm^-3]
+   1833     0.99990257E-11     0.13400000E+01
+ # number of grid points in charge fraction Y_q,minimum charge fraction, maximum charge fraction [dimensionless]
+      1     0.00000000E+00     0.00000000E+00
+ # number of grid points in magnetic field strength B,minimum magnetic field, maximum magnetic field [Gauss]
+      1     0.00000000E+00     0.00000000E+00
+ # thermodynamical data exist (1) or not (0)
+           1
+ # composition data exist (1) or not (0)
+           0
+ # microscopic data exist (1) or not (0)
+           0
+ # total number of table entries
+        1833
+ # number of additional quantities in eos.thermo
+           1
+ # number of phases
+           0
+ # indices of phases (see data sheet)
+
+ # number of particles
+           0
+ # indices of particles (see manual)
+
+ # number of particle sets
+           0
+ # indices of particle sets (see manual and data sheet)
+
+ # number of quantities in eos.micro
+           0
+ # indices of quantities (see manual)
+
+ # saturation density of symmetric nuclear matter [fm^-3]
+   0.00000
+ # binding energy B_sat per baryon at saturation [MeV]
+     0.000
+ # incompressibility K [MeV]
+     0.000
+ # skewness K^prime [MeV]
+     0.000
+ # symmetry energy J [MeV]
+     0.000
+ # symmetry energy slope parameter L [MeV]
+     0.000
+ # symmetry incompressibility K_sym [MeV]
+     0.000
+ # maximum relative error in free energy per baryon at point
+  0.99760237E-04     1 860   1
+ # maximum relative error in internal energy per baryon at point
+  0.99760237E-04     1 860   1
