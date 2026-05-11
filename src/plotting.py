@@ -33,9 +33,9 @@ def plot_data(BASE: Path):
 
     # Plot star sequences
     for out in output_dir.glob('star_sequence_eos*'):
-        results = np.loadtxt(out, skiprows=6)
-        R_vals = results[:,1]
-        M_vals = results[:,2]
+        data = np.loadtxt(out, skiprows=6)
+        R_vals = data[:,1]
+        M_vals = data[:,2]
 
         # fix file name for legend
         output_file_name = out.stem

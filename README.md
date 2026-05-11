@@ -138,8 +138,8 @@ For the cold beta-equilibrium EOS tables used here, the only varying grid parame
 The current generated tables use:
 
 - APR(APR) unified crust: `n_b = 1.0e-11` to `1.34`, `1833` points, logarithmic spacing
-- DS(CMF)-4 with crust: `n_b = 1.0e-7` to `3.03e+00`, `1700` points, logarithmic spacing
-- DS(CMF)-7 with crust: `n_b = 1.0e-7` to `1.87e+00`, `1700` points, logarithmic spacing
+- DS(CMF)-4 with crust: `n_b = 1.0e-7` to `3.03e+00`, `1129` points, logarithmic spacing
+- DS(CMF)-7 with crust: `n_b = 1.0e-7` to `1.87e+00`, `1021` points, logarithmic spacing
 
 This creates or updates `eos.parameters`.
 

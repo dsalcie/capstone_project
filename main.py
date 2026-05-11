@@ -1,7 +1,8 @@
 import os
 from pathlib import Path
 
-BASE = Path(__file__).parent # Project directory
+# -- Project directory -- #
+BASE = Path(__file__).parent
 
 import numpy as np
 from src.constants import r0, h, M_solar, rho, MEVFM3_TO_SI_PRESSURE
@@ -14,7 +15,7 @@ Pc_min = 1.5 # MeVfm3
 Pc_max = 450 # MeVfm3
 Number_of_stars = 500
 
-EOS_file = 'eos_ds_cmf4.table' # <- modify this line for desired EOS file
+EOS_file = 'eos_ds_cmf7.table' # <- modify this line for desired EOS file
 data_folder = BASE / 'data'
 file_path = data_folder / EOS_file
 
@@ -36,7 +37,7 @@ def tabulate_star_sequence(EOS_file, r0, h, Pc_min, Pc_max, num, solver, eos):
         eos
         )
 
-    # Generate tables of values for star sequence
+    # -- Generate tables of values for star sequence -- #
     with open(output_file, 'w') as file:
         header = (
             'Stellar Sequence\n'
@@ -62,8 +63,8 @@ def tabulate_star_sequence(EOS_file, r0, h, Pc_min, Pc_max, num, solver, eos):
                 eps_c_MeVfm3 = eps_c_SI / rho # convert back to MeVfm3
                 rows.append((Pc, R_km, M_M_solar, eps_c_MeVfm3))
 
-        # Sort by radius (km) before writing.
-        rows.sort(key=lambda row: row[2])
+        # -- Sort by central pressure values before writing -- #
+        rows.sort(key=lambda row: row[0])
         for Pc_MeVfm3, R_km, M_M_solar, eps_c in rows:
             row = (
                 f'{Pc_MeVfm3:15.8e}  {R_km:15.8e}   {M_M_solar:15.8e}   {eps_c:15.8e}\n'
@@ -73,5 +74,5 @@ def tabulate_star_sequence(EOS_file, r0, h, Pc_min, Pc_max, num, solver, eos):
     return output_file
 
 if __name__ == "__main__":
-    tabulate_star_sequence(EOS_file, r0, h, Pc_min, Pc_max, Number_of_stars, TOV_solver, eos)
+    #tabulate_star_sequence(EOS_file, r0, h, Pc_min, Pc_max, Number_of_stars, TOV_solver, eos)
     plot_data(BASE)
