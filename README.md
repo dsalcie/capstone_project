@@ -74,7 +74,7 @@ Note: the current loader skips the first line. The existing tables are dense eno
 
 Each subdirectory under `eos_dat_compilers/` is a separate CompOSE working directory. The current folders are:
 
-- `eos_dat_compilers/eos_apr(apr)_compiler`
+- `eos_dat_compilers/eos_apr(apr)_unified_crust_compiler`
 - `eos_dat_compilers/eos_ds(cmf)-4_with_crust_compiler`
 - `eos_dat_compilers/eos_ds(cmf)-7_with_crust_compiler`
 
@@ -137,9 +137,9 @@ For the cold beta-equilibrium EOS tables used here, the only varying grid parame
 
 The current generated tables use:
 
-- APR(APR): `n_b = 1.0e-8` to `1.0`, `1700` points, logarithmic spacing
-- DS(CMF)-4 with crust: `n_b = 1.0e-7` to `1.0`, `1700` points, logarithmic spacing
-- DS(CMF)-7 with crust: `n_b = 1.0e-7` to `1.0`, `1700` points, logarithmic spacing
+- APR(APR) unified crust: `n_b = 1.0e-11` to `1.34`, `1833` points, logarithmic spacing
+- DS(CMF)-4 with crust: `n_b = 1.0e-7` to `3.03e+00`, `1700` points, logarithmic spacing
+- DS(CMF)-7 with crust: `n_b = 1.0e-7` to `1.87e+00`, `1700` points, logarithmic spacing
 
 This creates or updates `eos.parameters`.
 
@@ -165,7 +165,7 @@ cp eos.table ../../data/eos_ds_cmf7.table
 
 Use the matching output name:
 
-- APR(APR): `data/eos_apr_apr.table`
+- APR(APR) unified crust: `data/eos_apr_apr_unified_crust.table`
 - DS(CMF)-4 with crust: `data/eos_ds_cmf4.table`
 - DS(CMF)-7 with crust: `data/eos_ds_cmf7.table`
 

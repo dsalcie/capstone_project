@@ -10,6 +10,7 @@ def TOV_solver(r0, P_c, h, eos, abs_tol=1e-6, rel_tol=1e-8):
         r0: initial radius (e.g., 10-100 m)
         P_c: central pressure
         h: step
+        eos: EoS Table
         abs_tol: absolute tolerance
         rel_tol: relative tolerance
     -Returns: list of tuples containing r, P, M, and eps (Energy Density) values for chosen central pressure
