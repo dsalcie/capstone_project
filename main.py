@@ -10,11 +10,11 @@ from src.solver import TOV_solver
 from src.sequence import generate_star_sequence
 from src.plotting import plot_data
 
-Pc_min = 1.5 # MeVfm3
-Pc_max = 425 # MeVfm3
+Pc_min = 4 # MeVfm3
+Pc_max = 1250 # MeVfm3
 Number_of_stars = 700
 
-EOS_file = 'eos_ds_cmf7.table' # <- modify this line for desired EOS file
+EOS_file = 'eos_apr_apr_unified_crust.table' # <- modify this line for desired EOS file
 data_folder = BASE / 'data'
 file_path = data_folder / EOS_file
 

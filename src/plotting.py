@@ -47,8 +47,7 @@ def plot_data(BASE: Path):
 
     ax.set_xlabel('R (km)')
     ax.set_ylabel(r'M(M$_{\odot}$)')
-    ax.legend(loc='best')
-    ax.grid(True, alpha=0.3)
+    ax.legend(loc='lower left', fontsize=7)
     fig.tight_layout()
     fig.savefig(plot_file, format='pdf', bbox_inches='tight', dpi=300)
     plt.close(fig)
