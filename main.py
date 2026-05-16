@@ -11,9 +11,9 @@ from src.solver import TOV_solver
 from src.sequence import generate_star_sequence
 from src.plotting import plot_data
 
-Pc_min = 1.5 # MeVfm3
+Pc_min = 0.05 # MeVfm3
 Pc_max = 450 # MeVfm3
-Number_of_stars = 500
+Number_of_stars = 1750
 
 EOS_file = 'eos_ds_cmf7.table' # <- modify this line for desired EOS file
 data_folder = BASE / 'data'
@@ -55,16 +55,14 @@ def tabulate_star_sequence(EOS_file, r0, h, Pc_min, Pc_max, num, solver, eos):
         Pc_MeVfm3_range = np.linspace(Pc_min, Pc_max, num)
         for star, Pc in zip(star_sequence, Pc_MeVfm3_range):
             if star is not None:
-                r, P, M, eps = star
+                r, M = star
                 R_km = r / 1000 # m to km
                 Pc_SI = Pc * MEVFM3_TO_SI_PRESSURE # convert to SI for eps_c
                 M_M_solar = M / M_solar
-                eps_c_SI = eos.cs_eps_of_P(Pc_SI) # interpolation in SI
+                eps_c_SI = eos.eps_of_P(Pc_SI) # interpolation in SI
                 eps_c_MeVfm3 = eps_c_SI / rho # convert back to MeVfm3
                 rows.append((Pc, R_km, M_M_solar, eps_c_MeVfm3))
 
-        # -- Sort by central pressure values before writing -- #
-        rows.sort(key=lambda row: row[0])
         for Pc_MeVfm3, R_km, M_M_solar, eps_c in rows:
             row = (
                 f'{Pc_MeVfm3:15.8e}  {R_km:15.8e}   {M_M_solar:15.8e}   {eps_c:15.8e}\n'
@@ -74,5 +72,5 @@ def tabulate_star_sequence(EOS_file, r0, h, Pc_min, Pc_max, num, solver, eos):
     return output_file
 
 if __name__ == "__main__":
-    #tabulate_star_sequence(EOS_file, r0, h, Pc_min, Pc_max, Number_of_stars, TOV_solver, eos)
+    tabulate_star_sequence(EOS_file, r0, h, Pc_min, Pc_max, Number_of_stars, TOV_solver, eos)
     plot_data(BASE)

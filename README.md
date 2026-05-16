@@ -20,7 +20,9 @@ The Python solver requires:
 - `scipy`
 - `matplotlib`
 
-Install them with:
+The code also uses Python standard-library modules including `os` and `pathlib`.
+
+Install the dependencies with:
 
 ```bash
 python3 -m pip install numpy scipy matplotlib
@@ -36,7 +38,10 @@ EOS_file = 'eos_ds_cmf7.table'
 
 The available project EOS tables are:
 
+- `data/eos_abht_qmc_rmf1_unified_crust.table`
 - `data/eos_apr_apr.table`
+- `data/eos_bl_chiral.table`
+- `data/eos_ds_cmf1.table`
 - `data/eos_ds_cmf4.table`
 - `data/eos_ds_cmf7.table`
 
@@ -53,7 +58,7 @@ This writes a sequence file to `outputs/star_sequence_<eos-name>.txt` and refres
 `src/eos.py` reads the EOS table with:
 
 ```python
-data = np.loadtxt(file_path, skiprows=1)
+data = np.loadtxt(file_path)
 P_MeVfm3 = data[:, 3]
 eps_MeVfm3 = data[:, 4]
 ```
@@ -68,13 +73,14 @@ So each EOS table must be a whitespace-delimited ASCII table with at least five 
 
 The current CompOSE exports in `eos_dat_compilers/*/eos.table` use this format.
 
-Note: the current loader skips the first line. The existing tables are dense enough that this does not affect the workflow, but if you add a header row or change the table loader, keep this behavior in mind.
-
 ## Regenerate EOS Tables From CompOSE
 
 Each subdirectory under `eos_dat_compilers/` is a separate CompOSE working directory. The current folders are:
 
+- `eos_dat_compilers/eos_abht(qmc-rmf1)_unified_crust_compiler`
 - `eos_dat_compilers/eos_apr(apr)_unified_crust_compiler`
+- `eos_dat_compilers/eos_bl(chiral)_with_crust_compiler`
+- `eos_dat_compilers/eos_ds(cmf)-1_with_crust_compiler`
 - `eos_dat_compilers/eos_ds(cmf)-4_with_crust_compiler`
 - `eos_dat_compilers/eos_ds(cmf)-7_with_crust_compiler`
 
@@ -137,7 +143,10 @@ For the cold beta-equilibrium EOS tables used here, the only varying grid parame
 
 The current generated tables use:
 
-- APR(APR) unified crust: `n_b = 1.0e-11` to `1.34`, `1833` points, logarithmic spacing
+- ABHT(QMC-RMF1) unified crust: `n_b = 1.0e-11` to `1.28`, `1876` points, logarithmic spacing
+- APR(APR): `n_b = 1.0e-11` to `1.34`, `1833` points, logarithmic spacing
+- BL(Chiral) with crust: `n_b = 1.0e-11` to `1.29`, `283` points, logarithmic spacing
+- DS(CMF)-1 with crust: `n_b = 1.0e-7` to `3.03e+00`, `1191` points, logarithmic spacing
 - DS(CMF)-4 with crust: `n_b = 1.0e-7` to `3.03e+00`, `1129` points, logarithmic spacing
 - DS(CMF)-7 with crust: `n_b = 1.0e-7` to `1.87e+00`, `1021` points, logarithmic spacing
 
@@ -165,7 +174,10 @@ cp eos.table ../../data/eos_ds_cmf7.table
 
 Use the matching output name:
 
-- APR(APR) unified crust: `data/eos_apr_apr_unified_crust.table`
+- ABHT(QMC-RMF1) unified crust: `data/eos_abht_qmc_rmf1_unified_crust.table`
+- APR(APR): `data/eos_apr_apr.table`
+- BL(Chiral) with crust: `data/eos_bl_chiral.table`
+- DS(CMF)-1 with crust: `data/eos_ds_cmf1.table`
 - DS(CMF)-4 with crust: `data/eos_ds_cmf4.table`
 - DS(CMF)-7 with crust: `data/eos_ds_cmf7.table`
 

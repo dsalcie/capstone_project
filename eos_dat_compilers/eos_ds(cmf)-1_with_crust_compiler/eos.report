@@ -1,0 +1,54 @@
+ # dimension of eos table
+           1
+ # number of grid points in temperature T,minimum temperature, maximum temperature [MeV]
+      1     0.00000000E+00     0.00000000E+00
+ # number of grid points in baryon number density n_b,minimum baryon number density, maximum baryon number density [fm^-3]
+   1191     0.10000000E-06     0.30300000E+01
+ # number of grid points in charge fraction Y_q,minimum charge fraction, maximum charge fraction [dimensionless]
+      1     0.00000000E+00     0.00000000E+00
+ # number of grid points in magnetic field strength B,minimum magnetic field, maximum magnetic field [Gauss]
+      1     0.00000000E+00     0.00000000E+00
+ # thermodynamical data exist (1) or not (0)
+           1
+ # composition data exist (1) or not (0)
+           1
+ # microscopic data exist (1) or not (0)
+           0
+ # total number of table entries
+        1191
+ # number of additional quantities in eos.thermo
+           3
+ # number of phases
+           2
+ # indices of phases (see data sheet)
+           4           1
+ # number of particles
+          17
+ # indices of particles (see manual)
+         500         501         502           0           1          11          10         100         112         111         110         121         120          23          22          21          20
+ # number of particle sets
+           1
+ # indices of particle sets (see manual and data sheet)
+           1
+ # number of quantities in eos.micro
+           0
+ # indices of quantities (see manual)
+
+ # saturation density of symmetric nuclear matter [fm^-3]
+   0.00000
+ # binding energy B_sat per baryon at saturation [MeV]
+     0.000
+ # incompressibility K [MeV]
+     0.000
+ # skewness K^prime [MeV]
+     0.000
+ # symmetry energy J [MeV]
+     0.000
+ # symmetry energy slope parameter L [MeV]
+     0.000
+ # symmetry incompressibility K_sym [MeV]
+     0.000
+ # maximum relative error in free energy per baryon at point
+ -0.87855815E-04     1 358   1
+ # maximum relative error in internal energy per baryon at point
+ -0.87855815E-04     1 358   1

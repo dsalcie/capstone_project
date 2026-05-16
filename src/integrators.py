@@ -1,4 +1,4 @@
-def RK4(f, g, h, eos, t0, y0, z0):
+def RK4(f, g, h, eos, t0, y0, z0) -> tuple:
     '''
     Implementation of Runge Kutta 4th Order-2nd ODE Solver, 1 iteration
     

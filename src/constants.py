@@ -1,6 +1,6 @@
 import numpy as np
 
-# Fundamental Constants - DO NOT CHANGE THESE
+# -- Fundamental Constants; DO NOT CHANGE THESE -- #
 c = 2.99792458e8 # m/s
 G = 6.67430e-11 # m^3 kg^-1 s^-2
 M_solar = 1.98847e30 # kg
@@ -8,6 +8,6 @@ pi = np.pi
 rho = 1.78266e15 # MeV/fm^3 to kg/m^3
 MEVFM3_TO_SI_PRESSURE = 1.602176634e32
 
-# Modify as needed for integrator routine
+# -- Modify as needed for integrator routine -- #
 r0 = 5 # in meters, not zero to avoid singularity 
-h = 15 # m, step size
+h = 10 # m, step size
