@@ -3,4 +3,18 @@
 
 # Python
 __pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv
+
+# Local/legacy test data
 legacy/
+data/Test EOS/
+outputs/Test EOS Outputs/
+
+# Generated solver outputs
+outputs/all_eos.pdf
+outputs/Single Star Profile/
+
+data/Test\ EOS/
