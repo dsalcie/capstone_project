@@ -12,6 +12,7 @@ venv
 legacy/
 data/Test EOS/
 outputs/Test EOS Outputs/
+outputs/all_eos.pdf
 
 # Generated solver outputs
 outputs/all_eos.pdf
