@@ -27,7 +27,7 @@ def TOV_solver(r0, P_c, h, eos, abs_tol=1e-8, rel_tol=1e-10):
     solutions = [first_solution]
 
     # -- Compute subsequent iterations until surface -- #
-    max_steps = 10000
+    max_steps = 15000
     steps = 0
     while P > P_stop and steps < max_steps:
         r, P, M = RK4(tov_dPdr, tov_dMdr, h, eos, r, P, M)
@@ -42,7 +42,7 @@ def TOV_solver(r0, P_c, h, eos, abs_tol=1e-8, rel_tol=1e-10):
     r_final = r1 + ((P_final - P1) / (P2 - P1)) * (r2 - r1)
     M_final = M1 + ((r_final - r1) / (r2 - r1)) * (M2 - M1)
     
-    if any(val < 0.00 for val in [r_final, M_final]) and any(np.isinf(val) for val in [r_final, M_final]):
+    if any(val < 0.00 for val in [r_final, M_final, r2, M2]) and any(np.isinf(val) for val in [r_final, M_final, r2, M2]):
         return None
     else:
-        return r_final, M_final
+        return r_final, M_final, r2, M2
