@@ -9,7 +9,6 @@ This project solves the Tolman-Oppenheimer-Volkoff equations for tabulated neutr
 - `data/`: EOS tables used by the Python solver and NICER posterior CSV files used for plotting.
 - `outputs/`: generated star-sequence text files and the combined mass-radius PDF.
 - `eos_dat_compilers/`: one CompOSE working directory per EOS. Each folder contains the downloaded CompOSE files, Fortran code, generated `eos.table`, and a README with source citations.
-- `legacy/`: older single-file solver scripts kept for reference.
 
 ## Python Requirements
 

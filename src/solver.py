@@ -3,10 +3,9 @@ from src.constants import pi
 from src.tov_equations import tov_dMdr, tov_dPdr
 from src.integrators import RK4
 
-def TOV_solver(r0, P_c, h, eos, abs_tol=1e-6, rel_tol=1e-10):
+def TOV_solver(r0, P_c, h, eos, abs_tol=1e-8, rel_tol=1e-10):
     '''
-    Implementation of a TOV solver
-
+    Implementation of a TOV equations solver
     -Takes:
         r0: initial radius in meters
         P_c: central pressure in SI units
@@ -21,28 +20,29 @@ def TOV_solver(r0, P_c, h, eos, abs_tol=1e-6, rel_tol=1e-10):
     M_c = (4/3) * pi * (r0**3) * eps_c
     #P_stop = max(abs_tol, rel_tol * P_c)
     P_stop = rel_tol * P_c
-    #P_stop = abs_tol
 
     # -- Compute first iteration with initial conditions -- #
     r, P, M = RK4(tov_dPdr, tov_dMdr, h, eos, r0, P_c, M_c)
-    first_solution = (r, P, M)
+    first_solution = (np.float64(r), np.float64(P), np.float64(M))
     solutions = [first_solution]
 
     # -- Compute subsequent iterations until surface -- #
-    max_steps = 15000
+    max_steps = 10000
     steps = 0
     while P > P_stop and steps < max_steps:
         r, P, M = RK4(tov_dPdr, tov_dMdr, h, eos, r, P, M)
-        solution = (r, P, M)
+        solution = (np.float64(r), np.float64(P), np.float64(M))
         solutions.append(solution)
         steps += 1
-    if any(val < 0 for val in solutions[-1]) or not all(np.isfinite(val) for val in solutions[-1]):
+    
+    # -- Linear extrapolation routine to estimate actual values for mass and radius of the star -- #
+    P_final = 0.00
+    r2, P2, M2 = solutions[-1]
+    r1, P1, M1 = solutions[-2] 
+    r_final = r1 + ((P_final - P1) / (P2 - P1)) * (r2 - r1)
+    M_final = M1 + ((r_final - r1) / (r2 - r1)) * (M2 - M1)
+    
+    if any(val < 0.00 for val in [r_final, M_final]) and any(np.isinf(val) for val in [r_final, M_final]):
         return None
     else:
-        # -- Linear interpolation routine to estimate actual values for mass and radius of the star -- #
-        P_final = 0.00
-        r2, P2, M2 = solutions[-1]
-        r1, P1, M1 = solutions[-2]
-        r_final = r1 + ((P_final - P1) / (P2 - P1)) * (r2 - r1)
-        M_final = M1 + ((r_final - r1) / (r2 - r1)) * (M2 - M1)
         return r_final, M_final

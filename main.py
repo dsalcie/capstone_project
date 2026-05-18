@@ -5,16 +5,22 @@ from pathlib import Path
 BASE = Path(__file__).parent
 
 import numpy as np
-from src.constants import r0, h, M_solar, rho, MEVFM3_TO_SI_PRESSURE
+from src.constants import M_solar, rho, MEVFM3_TO_SI_PRESSURE
 from src.eos import load_eos_data, TabulatedEOS
 from src.solver import TOV_solver
 from src.sequence import generate_star_sequence
 from src.plotting import plot_data
 
-Pc_min = 0.05 # MeVfm3
-Pc_max = 450 # MeVfm3
-Number_of_stars = 1750
+# -- Central pressure range -- #
+Pc_min = np.float64(0.1) # MeVfm3
+Pc_max = np.float64(450.0) # MeVfm3
+Number_of_stars = 1000
 
+# -- Modify as needed for integrator routine -- #
+r0 = np.float64(2.5) # in meters, not zero to avoid singularity 
+h = 1 # m, step size
+
+# -- Load EOS table -- #
 EOS_file = 'eos_ds_cmf7.table' # <- modify this line for desired EOS file
 data_folder = BASE / 'data'
 file_path = data_folder / EOS_file
