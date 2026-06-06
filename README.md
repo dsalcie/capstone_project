@@ -32,17 +32,17 @@ python3 -m pip install numpy scipy matplotlib
 The active EOS is selected in `main.py`:
 
 ```python
-EOS_file = 'eos_ds_cmf7.table'
+EOS_file = 'eos_ds_cmf6.table'
 ```
 
 The available project EOS tables are:
 
 - `data/eos_abht_qmc_rmf1_unified_crust.table`
-- `data/eos_apr_apr.table`
+- `data/eos_apr_apr_unified_crust.table`
 - `data/eos_bl_chiral.table`
 - `data/eos_ds_cmf1.table`
 - `data/eos_ds_cmf4.table`
-- `data/eos_ds_cmf7.table`
+- `data/eos_ds_cmf6.table`
 
 To run the solver:
 
@@ -81,7 +81,7 @@ Each subdirectory under `eos_dat_compilers/` is a separate CompOSE working direc
 - `eos_dat_compilers/eos_bl(chiral)_with_crust_compiler`
 - `eos_dat_compilers/eos_ds(cmf)-1_with_crust_compiler`
 - `eos_dat_compilers/eos_ds(cmf)-4_with_crust_compiler`
-- `eos_dat_compilers/eos_ds(cmf)-7_with_crust_compiler`
+- `eos_dat_compilers/eos_ds(cmf)-6_with_crust_compiler`
 
 These folders already contain the downloaded CompOSE data files and the CompOSE Fortran sources. To regenerate one table, work inside the corresponding folder.
 
@@ -92,7 +92,7 @@ You need GNU Make and a Fortran compiler.
 For a simple ASCII export, HDF5 is not required. Build with `USE_HDF5=0` so the Makefile uses `gfortran` instead of `h5fc`:
 
 ```bash
-cd "eos_dat_compilers/eos_ds(cmf)-7_with_crust_compiler"
+cd "eos_dat_compilers/eos_ds(cmf)-6_with_crust_compiler"
 make clean
 make USE_HDF5=0
 ```
@@ -131,23 +131,23 @@ where `1` is pressure and `24` is energy density.
 
 Run `./compose` again and choose Task 2, "Definition of Tabulation Scheme and Parameter Values".
 
-For the cold beta-equilibrium EOS tables used here, the only varying grid parameter is baryon number density `n_b`. Use:
+For the cold beta-equilibrium EOS tables used here, the only varying grid parameter is baryon number density `n_b`. The fixed dimensions use one point each at `T = 0` and `Y_q = 0`. Use:
 
-- interpolation order for `n_b`: `1`
+- interpolation order for each index: `1 1 1`
 - tabulation scheme: `1` for loop form
-- minimum `n_b`: use the minimum listed by CompOSE for that EOS
-- maximum `n_b`: use the density range needed for the stellar sequence
-- number of grid points: the current tables use `1700`
-- grid scaling: `1` for logarithmic
+- minimum `n_b`, maximum `n_b`, and number of grid points: use the table below
+- grid scaling for `n_b`: `1` for logarithmic
 
 The current generated tables use:
 
-- ABHT(QMC-RMF1) unified crust: `n_b = 1.0e-11` to `1.28`, `1876` points, logarithmic spacing
-- APR(APR): `n_b = 1.0e-11` to `1.34`, `1833` points, logarithmic spacing
-- BL(Chiral) with crust: `n_b = 1.0e-11` to `1.29`, `283` points, logarithmic spacing
-- DS(CMF)-1 with crust: `n_b = 1.0e-7` to `3.03e+00`, `1191` points, logarithmic spacing
-- DS(CMF)-4 with crust: `n_b = 1.0e-7` to `3.03e+00`, `1129` points, logarithmic spacing
-- DS(CMF)-7 with crust: `n_b = 1.0e-7` to `1.87e+00`, `1021` points, logarithmic spacing
+| EOS | Output table | `n_b` range `[fm^-3]` | Grid points | Scaling |
+| --- | --- | --- | ---: | --- |
+| ABHT(QMC-RMF1) unified crust | `data/eos_abht_qmc_rmf1_unified_crust.table` | `1.00e-10` to `1.28e+00` | 1876 | logarithmic |
+| APR(APR) unified crust | `data/eos_apr_apr_unified_crust.table` | `1.00e-11` to `1.34e+00` | 1833 | logarithmic |
+| BL(Chiral) with crust | `data/eos_bl_chiral.table` | `7.93e-15` to `1.29e+00` | 283 | logarithmic |
+| DS(CMF)-1 with crust | `data/eos_ds_cmf1.table` | `1.00e-7` to `3.03e+00` | 1191 | logarithmic |
+| DS(CMF)-4 with crust | `data/eos_ds_cmf4.table` | `1.00e-7` to `3.03e+00` | 1129 | logarithmic |
+| DS(CMF)-6 with crust | `data/eos_ds_cmf6.table` | `1.00e-7` to `1.89e+00` | 1023 | logarithmic |
 
 This creates or updates `eos.parameters`.
 
@@ -168,17 +168,17 @@ Check that `eos.info.json` identifies column 4 as pressure and column 5 as energ
 Rename the generated table according to the project convention:
 
 ```bash
-cp eos.table ../../data/eos_ds_cmf7.table
+cp eos.table ../../data/eos_ds_cmf6.table
 ```
 
 Use the matching output name:
 
 - ABHT(QMC-RMF1) unified crust: `data/eos_abht_qmc_rmf1_unified_crust.table`
-- APR(APR): `data/eos_apr_apr.table`
+- APR(APR) unified crust: `data/eos_apr_apr_unified_crust.table`
 - BL(Chiral) with crust: `data/eos_bl_chiral.table`
 - DS(CMF)-1 with crust: `data/eos_ds_cmf1.table`
 - DS(CMF)-4 with crust: `data/eos_ds_cmf4.table`
-- DS(CMF)-7 with crust: `data/eos_ds_cmf7.table`
+- DS(CMF)-6 with crust: `data/eos_ds_cmf6.table`
 
 Then rerun:
 
